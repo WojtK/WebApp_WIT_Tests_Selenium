@@ -10,8 +10,7 @@ import static Methods.Data.*;
 
 import java.util.concurrent.TimeUnit;
 
-import static Methods.ID.*;
-import static Methods.Logging.*;
+import static Methods.Account.*;
 import static org.junit.Assert.assertEquals;
 
 /*
@@ -30,7 +29,7 @@ public class Aplikacja_WIT_26 {
         driver = BeforeClassMethod.Start();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        log.info("# Scenariusz Aplikacja_WIT_26 - Logowanie - prawidłowe dane");
+        log.info("### Scenariusz Aplikacja_WIT_26 - Logowanie - prawidłowe dane");
     }
 
 
@@ -39,7 +38,6 @@ public class Aplikacja_WIT_26 {
         flag = true;
         try {
             log.info("Próba logowania username:" + CorrectUsername + " hasło:" + CorrectPassword);
-            TimeUnit.SECONDS.sleep(5);
             driver.findElement(By.name("username")).sendKeys(CorrectUsername);
             driver.findElement(By.name("password")).sendKeys(CorrectPassword);
             driver.findElement(By.id("log_in_btn")).click();
@@ -48,7 +46,7 @@ public class Aplikacja_WIT_26 {
             AssertFlag = false;
             log.warn("Nieudana próba logowania");
         }
-        assertEquals(true, AssertFlag);
+        assertEquals(true, flag);
     }
 
 
@@ -67,8 +65,7 @@ public class Aplikacja_WIT_26 {
             flag = false;
             AssertFlag = false;
         }
-        TimeUnit.SECONDS.sleep(4);
-        assertEquals(true, AssertFlag);
+        assertEquals(true, flag);
     }
 
 

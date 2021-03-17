@@ -1,18 +1,14 @@
 package scenarios.Aplikacja;
 
 import Methods.BeforeClassMethod;
-import Methods.Logging;
+import Methods.Account;
 import org.junit.AfterClass;
 import org.junit.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import static Methods.Data.*;
 
 import java.util.concurrent.TimeUnit;
 
-import static Methods.ID.*;
-import static Methods.Logging.*;
+import static Methods.Account.*;
 import static org.junit.Assert.assertEquals;
 
 /*
@@ -31,23 +27,26 @@ public class Aplikacja_WIT_27 {
         driver = BeforeClassMethod.Start();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        log.info("# Scenariusz Aplikacja_WIT_27 - Wylogowanie");
+        log.info("### Scenariusz Aplikacja_WIT_27 - Wylogowanie");
         Log_in(driver);
     }
 
 
     @Test
-    public void Test1() throws InterruptedException {
+    public void Test1(){
         flag = true;
         try {
-            if(Logging.Is_Logged_In(driver)) log.info("Zalogowane konto");
-            else { log.warn("Brak zalogowanego konta"); Log_in(driver); }
+            if (Account.Is_Logged_In(driver)) log.info("Zalogowane konto");
+            else {
+                log.warn("Brak zalogowanego konta");
+                Log_in(driver);
+            }
         } catch (Exception e) {
             flag = false;
             AssertFlag = false;
             log.warn("Nieudana próba logowania");
         }
-        assertEquals(true, AssertFlag);
+        assertEquals(true, flag);
     }
 
 
@@ -66,19 +65,22 @@ public class Aplikacja_WIT_27 {
             flag = false;
             AssertFlag = false;
         }
-        assertEquals(true, AssertFlag);
+        TimeUnit.SECONDS.sleep(2);
+        assertEquals(true, flag);
     }
 
     @Test
     public void Test3() {
-        flag = false;
-        try { Log_out(driver); log.info("Wylogowanie udane");}
-        catch (Exception e) {
+        flag = true;
+        try {
+            Log_out(driver);
+            log.info("Wylogowanie udane");
+        } catch (Exception e) {
             flag = false;
             AssertFlag = false;
             log.warn("Wylogowanie nie powiodło się");
         }
-        assertEquals(true, AssertFlag);
+        assertEquals(true, flag);
     }
 
     @AfterClass
