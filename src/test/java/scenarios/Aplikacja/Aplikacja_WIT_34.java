@@ -87,7 +87,7 @@ public class Aplikacja_WIT_34 {
         try {
             String title = driver.findElement(By.id("post_title")).getText();
             String date = driver.findElement(By.id("publish_date")).getText();
-            log.info("Post tytuł: " + title + "\n"+ date);
+            log.info("Post tytuł: " + title + "\n" + date);
 
             driver.findElement(By.id("share_post")).click();
             log.info("Przejscie do formularza udostępniania postu");

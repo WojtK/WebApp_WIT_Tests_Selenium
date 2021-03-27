@@ -20,7 +20,6 @@ import static org.junit.Assert.assertEquals;
 */
 
 
-
 public class Aplikacja_WIT_35 {
 
     static boolean AssertFlag = true;
@@ -87,14 +86,16 @@ public class Aplikacja_WIT_35 {
     public void Test4() {
         flag = true;
         try {
-            String title =  driver.findElement(By.id("post_title")).getText();
-            String date =  driver.findElement(By.id("publish_date")).getText();
-            log.info("Post tytuł: "+title+"\n"+date);
+            String title = driver.findElement(By.id("post_title")).getText();
+            String date = driver.findElement(By.id("publish_date")).getText();
+            log.info("Post tytuł: " + title + "\n" + date);
             log.info("Próba dodania komentarza");
             Add_Comment(driver, "testowy komentarz", "test@selenium.com", "selenium");
-            if(driver.findElement(By.id("success")).getText().contains("Twój komentarz został dodany")) {
+            if (driver.findElement(By.id("success")).getText().contains("Twój komentarz został dodany")) {
                 log.info("Udane dodanie komentarza");
-            } else  { throw  new Exception();}
+            } else {
+                throw new Exception();
+            }
         } catch (Exception e) {
             flag = false;
             AssertFlag = false;
