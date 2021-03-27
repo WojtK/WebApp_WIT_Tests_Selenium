@@ -1,22 +1,26 @@
 package scenarios.Aplikacja;
 
-import Methods.BeforeClassMethod;
 import Methods.Account;
+import Methods.BeforeClassMethod;
 import org.junit.AfterClass;
-import org.junit.*;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
 
-import static Methods.Account.*;
+import static Methods.Account.Log_in;
+import static Methods.Account.log;
 import static org.junit.Assert.assertEquals;
 
 /*
-   Scenariusz WIT_27 - [Aplikacja]: Wylogowanie
+   Scenariusz WIT_33 - Blog - lista postów
 
 */
 
-public class Aplikacja_WIT_27 {
+
+public class Aplikacja_WIT_33 {
 
     static boolean AssertFlag = true;
     static boolean flag = true;
@@ -27,13 +31,12 @@ public class Aplikacja_WIT_27 {
         driver = BeforeClassMethod.Start();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        log.info("### Scenariusz Aplikacja_WIT_27 - Wylogowanie");
-        Log_in(driver);
+        log.info("### Scenariusz Aplikacja_WIT_33 - Blog - lista postów");
     }
 
 
     @Test
-    public void Test1() {
+    public void Test1() throws InterruptedException {
         flag = true;
         try {
             if (Account.Is_Logged_In(driver)) log.info("Zalogowane konto");
@@ -54,18 +57,13 @@ public class Aplikacja_WIT_27 {
     public void Test2() throws InterruptedException {
         flag = true;
         try {
-            if (Is_Logged_In(driver)) {
-                log.info("Udało się prawidłowo zalogować");
-            } else {
-                log.warn("Nieudane logowanie");
-                flag = false;
-                AssertFlag = false;
-            }
+            driver.findElement(By.id("blog")).click();
+            log.info("Prawidłowe przejscie do bloga");
         } catch (Exception e) {
             flag = false;
             AssertFlag = false;
+            log.warn("Nieprawidłowe przejscie do bloga");
         }
-        TimeUnit.SECONDS.sleep(2);
         assertEquals(true, flag);
     }
 
@@ -73,22 +71,26 @@ public class Aplikacja_WIT_27 {
     public void Test3() {
         flag = true;
         try {
-            Log_out(driver);
-            log.info("Wylogowanie udane");
+            driver.findElement(By.id("blog_post"));
+            driver.findElement(By.id("public_date"));
+            driver.findElement(By.id("current_page"));
+            driver.findElement(By.id("content"));
+            log.info("Prawidłowa zawartosc bloga");
         } catch (Exception e) {
             flag = false;
             AssertFlag = false;
-            log.warn("Wylogowanie nie powiodło się");
+            log.warn("Nieprawidłowa zawartosc bloga");
         }
         assertEquals(true, flag);
     }
 
+
     @AfterClass
     public static void Close() {
         if (AssertFlag)
-            log.info("### Scenariusz Aplikacja_WIT_27 ukończony pomyślnie ");
+            log.info("### Scenariusz Aplikacja_WIT_33 ukończony pomyślnie ");
         else
-            log.warn("### Scenariusz Aplikacja_WIT_27 ukończony niepomyślnie ");
+            log.warn("### Scenariusz Aplikacja_WIT_33 ukończony niepomyślnie ");
         driver.close();
     }
 

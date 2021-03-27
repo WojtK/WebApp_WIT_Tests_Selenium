@@ -102,6 +102,21 @@ public class Account {
         return 0;
     }
 
+    public static void Share_Post(WebDriver driver, String content, String email, String to, String name) throws InterruptedException {
+        TimeUnit.SECONDS.sleep(2);
+        driver.findElement(By.name("name")).sendKeys(name);
+        driver.findElement(By.name("email")).sendKeys(email);
+        driver.findElement(By.name("to")).sendKeys(to);
+        driver.findElement(By.name("comments")).sendKeys(content);
+        driver.findElement(By.id("send_post")).click();
+    }
 
+    public static void Add_Comment(WebDriver driver, String content, String email,String name) throws InterruptedException {
+        TimeUnit.SECONDS.sleep(2);
+        driver.findElement(By.name("name")).sendKeys(name);
+        driver.findElement(By.name("email")).sendKeys(email);
+        driver.findElement(By.name("body")).sendKeys(content);
+        driver.findElement(By.id("add_comment")).click();
+    }
 
 }
